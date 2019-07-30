@@ -1,0 +1,32 @@
+package com.DAO;
+import java.sql.*;
+
+public class JdbcUpdate {
+	public static void SQLUpdate() {
+		int id=1;
+		float loanAmount=10000;
+		float payment=2000;
+		
+		try (
+			Connection conn = DriverManager.getConnection(
+					"jdbc:sqlserver://HGTCSY1\\SQLEXPRESS;user=e91095;password=Fairmont 105");
+			Statement stmt = conn.createStatement();
+		){
+			String strUpdate = "update Customers set LoanAmount="+(loanAmount-payment)+" where UserID="+id;
+			// Need to create variable payment within a class to take what the user inputs and subtract the amount from their loan amount
+			// where UserID within the database equals ID the user has inputed online.
+			System.out.println("The SQL statement is: " +strUpdate+ "\n");
+			int countUpdated = stmt.executeUpdate(strUpdate);
+			System.out.println(countUpdated + "records affected. \n");
+			String strSelect = "select * from Customers where UserID=id.GET()";
+			System.out.println("The SQL statement is: " +strSelect + "\n");
+		
+	
+		
+	} catch(SQLException ex) {
+		ex.printStackTrace();
+		// this closes connection to the database
+	}
+
+}
+}
