@@ -1,0 +1,43 @@
+package com.DAO;
+
+import java.sql.*;
+
+import com.Model.CustomerData;
+
+public class JdbcSelect {
+	public static CustomerData SQLSelect(int id) {
+		CustomerData data = new CustomerData();
+	try (
+		Connection conn = DriverManager.getConnection(
+				"jdbc:sqlserver://HGTCSY1/SQLEXPRESS;user=e91095;password=Fairmont 105");
+		Statement stmt = conn.createStatement();
+		){
+		
+		String strSelect = "select * from Customers where UserID="+id;
+		// in this select statement, I need to grab the users information depending on the ID that the user inputs within the webpage. 
+		// need to change the Id.GET function 
+		System.out.println("The SQL statement is:"+ strSelect + "\n");
+		ResultSet rset = stmt.executeQuery(strSelect);
+		System.out.println("The records selected are: ");
+		int rowCount = 0;
+		while(rset.next()) {
+			id = rset.getInt("UserID");
+			String firstName = rset.getString("FirstName");
+			String lastName = rset.getString("LastName");
+			int ssn = rset.getInt("SSN");
+			float loanAmount = rset.getFloat("LoanAmount");
+			data.setFirstName(firstName);
+			data.setId(id);
+			data.setLastName(lastName);
+			data.setLoanAmount(loanAmount);
+			System.out.println(id + ", " +firstName+", "+lastName+", "+ssn+", "+loanAmount);
+			++rowCount;
+		}
+		System.out.println("total amount of rows "+rowCount);
+		
+	} catch(SQLException ex) {
+		ex.printStackTrace();
+	}
+	return data;
+}
+}
