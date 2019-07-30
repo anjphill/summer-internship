@@ -1,0 +1,54 @@
+package com.ApplicationController;
+import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.DAO.JdbcSelect;
+import com.DAO.JdbcUpdate;
+import com.Model.CustomerData;
+
+@Controller
+@RequestMapping("/customer-main")
+public class ApplicationController {
+	
+	@Autowired
+	JdbcSelect jdbcSelect;
+	
+	
+	//CustomerManager manager;
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public static String getCustomer(int id, Model model) {
+		JdbcSelect jdbcSelect = new JdbcSelect();
+		CustomerData data  = jdbcSelect.SQLSelect(id);
+		
+		//System.out.println("Customer information: "+customer(customerModel.getId())+customer(customerModel.getfirstName())+customer(customerModel.getlastName())+customer(customerModel.getSsn())+customer(customerModel.getLoanAmount()));
+		model.addAttribute("Id", data.getId());
+		model.addAttribute("FirstName", data.getFirstName());
+		model.addAttribute("LastName", data.getLastName());
+		model.addAttribute("SSN", data.getSsn());
+		model.addAttribute("LoanAmt", data.getLoanAmount());
+		return "home";
+			
+	}
+	@RequestMapping(value="/payment", method=RequestMethod.GET)
+	public static String displayAmt(int id, Model model) {
+		JdbcSelect jdbcSelect = new JdbcSelect();
+		CustomerData data = jdbcSelect.SQLSelect(id);
+		model.addAttribute("LoanAmount", data.getLoanAmount());
+		model.addAttribute("LoanPayment", data.getLoanPayment());
+		return "payment";
+		
+	}
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public static Object repayAmt(int id, int loanAmount, Model model) {
+		JdbcSelect jdbcSelect = new JdbcSelect();
+		JdbcUpdate jdbcUpdate = jdbcSelect.SQLSelect(loanAmount);
+		CustomerData data = jdbcSelect.SQLSelect(id);
+		return "home";
+		
+		
+		
+	}
+}
