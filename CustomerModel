@@ -1,0 +1,49 @@
+package com.Model;
+import java.io.Serializable;
+//this converts java objects into a byte stream so we can use it within other platforms 
+
+public class CustomerData implements Serializable {
+	private int Id;
+	private String firstName;
+	private String lastName;
+	private int ssn;
+	private float loanPayment;
+	private float loanAmount;
+	
+	public int getId() {
+		return Id;
+	}
+	public void setId(int Id) {
+		this.Id=Id;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName=firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName=lastName;
+	}
+	public int getSsn() {
+		return ssn;
+	}
+	public void setSsn(int ssn) {
+		this.ssn=ssn;
+	}
+	public float getLoanAmount() {
+		return loanAmount;
+	}
+	public void setLoanAmount(float loanAmount) {
+		this.loanAmount=loanAmount;
+	}
+	public float getLoanPayment() {
+		return loanPayment;
+	}
+	public void setLoanPayment(float loanPayment) {
+		this.loanPayment=loanPayment;
+	}
+}
