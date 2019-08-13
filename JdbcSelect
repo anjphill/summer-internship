@@ -9,7 +9,7 @@ public class JdbcSelect {
 		CustomerData data = new CustomerData();
 	try (
 		Connection conn = DriverManager.getConnection(
-				"jdbc:sqlserver://servername/SQLEXPRESS;user=*****;password=*****");
+				"jdbc:sqlserver://serverName/SQLEXPRESS;user=*****;password=*****");
 		Statement stmt = conn.createStatement();
 		){
 		
