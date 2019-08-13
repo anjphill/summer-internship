@@ -9,7 +9,7 @@ public class JdbcUpdate {
 		
 		try (
 			Connection conn = DriverManager.getConnection(
-					"jdbc:sqlserver://HGTCSY1\\SQLEXPRESS;user=e91095;password=Fairmont 105");
+					"jdbc:sqlserver://serverName\\SQLEXPRESS;user=*****;password=*****");
 			Statement stmt = conn.createStatement();
 		){
 			String strUpdate = "update Customers set LoanAmount="+(loanAmount-payment)+" where UserID="+id;
